@@ -24,7 +24,7 @@ dependencies {
     //=====================
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+//    implementation 'org.springframework.boot:spring-boot-starter-websocket'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -59,11 +59,11 @@ dependencies {
     //=====================
     // keycloak
     //=====================
-    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '13.0.1'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
-    implementation group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '13.0.1'
-    implementation group: 'org.keycloak', name: 'keycloak-admin-client', version: '13.0.1'
-    implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '13.0.1', ext: 'pom'
+//    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '13.0.1'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+//    implementation group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '13.0.1'
+//    implementation group: 'org.keycloak', name: 'keycloak-admin-client', version: '13.0.1'
+//    implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '13.0.1', ext: 'pom'
 
 }
 
