@@ -1,5 +1,6 @@
 package com.englishtutor.model;
 
+import com.englishtutor.model.person.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tutor {
+public class Tutor extends Person {
     @Id
     @Column(name = "id", nullable = false)
     @GenericGenerator(name="SID_customGenerator",strategy = "com.englishtutor.utils.StudentIdGenerator")

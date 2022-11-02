@@ -1,11 +1,14 @@
 package com.englishtutor.model;
 
+import com.englishtutor.model.person.Person;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Students {
+public class Students extends Person {
     @Id
     @Column(name = "id", nullable = false)
     @GenericGenerator(name="SID_customGenerator",strategy = "com.englishtutor.utils.StudentIdGenerator")
