@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.7'
+    id 'org.springframework.boot' version '2.5.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -59,12 +59,12 @@ dependencies {
     //=====================
     // keycloak
     //=====================
-    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '13.0.1'
+    implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '12.0.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
-    implementation group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '13.0.1'
-    implementation group: 'org.keycloak', name: 'keycloak-admin-client', version: '13.0.1'
-    implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '13.0.1', ext: 'pom'
-    implementation 'org.springframework.boot:spring-boot-starter-security:2.3.11.RELEASE'
+    implementation group: 'org.keycloak', name: 'keycloak-spring-security-adapter', version: '12.0.1'
+    implementation 'org.keycloak:keycloak-admin-client:20.0.3'
+    implementation group: 'org.keycloak.bom', name: 'keycloak-adapter-bom', version: '12.0.1', ext: 'pom'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 
