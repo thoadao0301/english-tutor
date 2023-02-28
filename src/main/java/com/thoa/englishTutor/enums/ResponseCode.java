@@ -9,6 +9,7 @@ public enum ResponseCode {
 
     // User
     USER_EXISTED(1001,"User existed"),
+    USER_NOT_EXISTED(1002, "User is not existed"),
     ;
 
     private int code;

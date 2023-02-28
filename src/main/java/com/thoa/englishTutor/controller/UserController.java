@@ -52,8 +52,8 @@ public class UserController implements IUserController {
 
 
     @GetMapping("/getUserList")
-    @RolesAllowed("ef_admin")
-    public ResponseEntity<ResponseObject> getUserList(GetUserListRequest request) {
-        return null;
+    @RolesAllowed("admin")
+    public ResponseEntity<ResponseObject> getUserList() {
+        return new ResponseEntity<>(userService.findAllUser(),HttpStatus.OK);
     }
 }

@@ -1,9 +1,12 @@
 package com.thoa.englishTutor.service;
 
 import com.thoa.englishTutor.common.ResponseObject;
+import com.thoa.englishTutor.dtos.dto.UserDto;
 import com.thoa.englishTutor.dtos.request.user.CheckEmailIfExistRequest;
 import com.thoa.englishTutor.dtos.request.user.RegisterUserRequest;
 import com.thoa.englishTutor.dtos.response.user.CheckEmailIfExistResponse;
+import com.thoa.englishTutor.dtos.response.user.GetUserInfoResponse;
+import com.thoa.englishTutor.dtos.response.user.GetUserListResponse;
 import com.thoa.englishTutor.dtos.response.user.RegisterUserResponse;
 import com.thoa.englishTutor.enums.ResponseCode;
 import com.thoa.englishTutor.enums.UserRole;
@@ -14,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -71,5 +76,21 @@ public class UserService {
         }
 
         return responseObject.success(new RegisterUserResponse(saveUser));
+    }
+
+    public ResponseObject findAllUser(){
+        ResponseObject<GetUserListResponse> responseObject = new ResponseObject<>();
+        try {
+            Iterable<User> users = userRepository.findAll();
+            List<UserDto> userDtoList = new ArrayList<>();
+            users.forEach(user -> {
+                UserDto userDto = ObjectMapperUtil.objectMapper(user, UserDto.class);
+                userDtoList.add(userDto);
+            });
+            return responseObject.success(new GetUserListResponse(userDtoList));
+        }catch (Exception e){
+            log.error("find all user gets error");
+            return responseObject.fail();
+        }
     }
 }

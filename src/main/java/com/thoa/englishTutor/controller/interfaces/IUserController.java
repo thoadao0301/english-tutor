@@ -85,5 +85,5 @@ public interface IUserController {
             }
     )
     @GetMapping("/getUserList")
-    ResponseEntity<ResponseObject> getUserList(GetUserListRequest request);
+    ResponseEntity<ResponseObject> getUserList();
 }
