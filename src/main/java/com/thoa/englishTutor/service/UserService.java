@@ -4,10 +4,8 @@ import com.thoa.englishTutor.common.ResponseObject;
 import com.thoa.englishTutor.dtos.dto.UserDto;
 import com.thoa.englishTutor.dtos.request.user.CheckEmailIfExistRequest;
 import com.thoa.englishTutor.dtos.request.user.RegisterUserRequest;
-import com.thoa.englishTutor.dtos.response.user.CheckEmailIfExistResponse;
-import com.thoa.englishTutor.dtos.response.user.GetUserInfoResponse;
-import com.thoa.englishTutor.dtos.response.user.GetUserListResponse;
-import com.thoa.englishTutor.dtos.response.user.RegisterUserResponse;
+import com.thoa.englishTutor.dtos.request.user.UpdateUserRequest;
+import com.thoa.englishTutor.dtos.response.user.*;
 import com.thoa.englishTutor.enums.ResponseCode;
 import com.thoa.englishTutor.enums.UserRole;
 import com.thoa.englishTutor.model.User;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -60,7 +59,7 @@ public class UserService {
             return responseObject.fail();
         }
 
-        newUser.setId(UUID.fromString(userId));
+        newUser.setId(userId);
         User saveUser = null;
         try {
             saveUser = userRepository.save(newUser);
@@ -90,6 +89,27 @@ public class UserService {
             return responseObject.success(new GetUserListResponse(userDtoList));
         }catch (Exception e){
             log.error("find all user gets error");
+            return responseObject.fail();
+        }
+    }
+
+    public ResponseObject updateUserInformation(String id,UpdateUserRequest request){
+        ResponseObject<UpdateUserResponse> responseObject = new ResponseObject<>();
+        try {
+            Optional<User> userOptional = userRepository.findById(id);
+            if (userOptional.isEmpty()){
+                return responseObject.businessError(ResponseCode.USER_NOT_EXISTED);
+            }
+            User user = userOptional.get();
+            user.setFirstName(request.getFirstName());
+            user.setLastName(request.getLastName());
+            user.setBirthday(request.getBirthday());
+            user.setPhoneNumber(request.getPhoneNumber());
+
+            User saveUser = userRepository.save(user);
+            return responseObject.success(ObjectMapperUtil.objectMapper(saveUser, UpdateUserResponse.class));
+        }catch (Exception e){
+            log.error("Updating user's information gets error");
             return responseObject.fail();
         }
     }

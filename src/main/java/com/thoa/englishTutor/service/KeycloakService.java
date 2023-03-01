@@ -60,7 +60,6 @@ public class KeycloakService {
         Response result = null;
         try {
             result = usersResource.create(keycloakUser);
-            log.info("{},{}",result.getStatusInfo(), usersResource.list().get(0).getUsername());
         } catch(Exception e) {
             log.error("Keycloak can not create the new user");
             throw new RuntimeException("Keycloak can not create the new user");

@@ -6,10 +6,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.keycloak.KeycloakPrincipal;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Tag(name = "User controller", description = "Thao tác với user ")
 @RequestMapping(value = "/api/v1/user")
@@ -27,8 +30,8 @@ public interface IUserController {
     ResponseEntity<ResponseObject> checkEmailIfExist(@Parameter String email);
 
     @Operation(
-            summary = "Đăng ký mới user",
-            description = "- Đăng ký mới user",
+            summary = "Student register",
+            description = "- Student register",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Success"),
                     @ApiResponse(responseCode = "500", description = "Internal Server Error")
@@ -36,6 +39,17 @@ public interface IUserController {
     )
     @PostMapping("/studentRegister")
     ResponseEntity<ResponseObject> studentRegister(@RequestBody @Valid RegisterUserRequest request);
+
+    @Operation(
+            summary = "Tutor register",
+            description = "- Tutor register",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Success"),
+                    @ApiResponse(responseCode = "500", description = "Internal Server Error")
+            }
+    )
+    @PostMapping("/tutorRegister")
+    ResponseEntity<ResponseObject> tutorRegister(@RequestBody @Valid RegisterUserRequest request);
 
     // TODO verify account API through email - research
 
@@ -49,7 +63,7 @@ public interface IUserController {
             }
     )
     @PutMapping("/update")
-    ResponseEntity<ResponseObject> update(@RequestBody @Valid UpdateUserRequest request);
+    ResponseEntity<ResponseObject> update(@AuthenticationPrincipal Principal principal, @RequestBody @Valid UpdateUserRequest request);
 
     // role user
     @Operation(
@@ -85,5 +99,5 @@ public interface IUserController {
             }
     )
     @GetMapping("/getUserList")
-    ResponseEntity<ResponseObject> getUserList();
+    ResponseEntity<ResponseObject> getUserList(Principal principal);
 }

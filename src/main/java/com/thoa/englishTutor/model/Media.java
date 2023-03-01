@@ -11,12 +11,12 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity()
-@Table(name = "medias")
+@Table(name = "media")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Media {
     @Id
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private String id;
 }

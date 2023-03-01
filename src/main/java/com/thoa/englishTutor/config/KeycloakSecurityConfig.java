@@ -28,6 +28,12 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
             "/swagger-ui.html",
     };
 
+    private static final String[] USER_LOGIN = {
+            "/api/v1/user/checkEmailIfExist",
+            "/api/v1/user/studentRegister",
+            "/api/v1/user/tutorRegister",
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -36,8 +42,12 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .anyRequest()
+                .antMatchers(SWAGGER_WHITELIST)
                 .permitAll()
+                .antMatchers(USER_LOGIN)
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .addFilterBefore(new SimpleCORSFilter(), WebAsyncManagerIntegrationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
