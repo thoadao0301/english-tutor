@@ -88,6 +88,7 @@ public class UserService {
             });
             return responseObject.success(new GetUserListResponse(userDtoList));
         }catch (Exception e){
+            e.printStackTrace();
             log.error("find all user gets error");
             return responseObject.fail();
         }
@@ -109,7 +110,23 @@ public class UserService {
             User saveUser = userRepository.save(user);
             return responseObject.success(ObjectMapperUtil.objectMapper(saveUser, UpdateUserResponse.class));
         }catch (Exception e){
+            e.printStackTrace();
             log.error("Updating user's information gets error");
+            return responseObject.fail();
+        }
+    }
+
+    public ResponseObject getUserInfo(String id){
+        ResponseObject<GetUserInfoResponse> responseObject = new ResponseObject<>();
+        try {
+            Optional<User> userOptional = userRepository.findById(id);
+            if (userOptional.isEmpty()){
+                return responseObject.businessError(ResponseCode.USER_NOT_EXISTED);
+            }
+            return responseObject.success(ObjectMapperUtil.objectMapper(userOptional.get(),GetUserInfoResponse.class));
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("Getting user's information gets error");
             return responseObject.fail();
         }
     }

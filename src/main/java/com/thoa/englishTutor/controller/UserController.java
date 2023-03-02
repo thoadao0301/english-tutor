@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
-import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -48,8 +47,8 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public ResponseEntity<ResponseObject> getInfo(GetUserInfoRequest request) {
-        return null;
+    public ResponseEntity<ResponseObject> getInfo(Principal principal) {
+        return new ResponseEntity<>(userService.getUserInfo(principal.getName()),HttpStatus.OK);
     }
 
     @Override

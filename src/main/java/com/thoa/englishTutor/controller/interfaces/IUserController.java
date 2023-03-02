@@ -6,9 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.keycloak.KeycloakPrincipal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -63,7 +61,7 @@ public interface IUserController {
             }
     )
     @PutMapping("/update")
-    ResponseEntity<ResponseObject> update(@AuthenticationPrincipal Principal principal, @RequestBody @Valid UpdateUserRequest request);
+    ResponseEntity<ResponseObject> update(Principal principal, @RequestBody @Valid UpdateUserRequest request);
 
     // role user
     @Operation(
@@ -87,7 +85,7 @@ public interface IUserController {
             }
     )
     @GetMapping("/getInfo")
-    ResponseEntity<ResponseObject> getInfo(GetUserInfoRequest request);
+    ResponseEntity<ResponseObject> getInfo(Principal principal);
 
     // role admin - staff
     @Operation(
